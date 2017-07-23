@@ -47,6 +47,13 @@ public class RxImagePicker {
         return publishSubjectMultipleImages;
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
+    public Observable<List<Uri>> requestMultipleFiles() {
+        publishSubjectMultipleImages = PublishSubject.create();
+        startImagePickHiddenActivity(Sources.FILE.ordinal(), true);
+        return publishSubjectMultipleImages;
+    }
+
     void onImagePicked(Uri uri) {
         if (publishSubject != null) {
             publishSubject.onNext(uri);

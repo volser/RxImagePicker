@@ -128,6 +128,20 @@ public class HiddenActivity extends Activity {
                 pictureChooseIntent.setType("image/*");
                 chooseCode = SELECT_PHOTO;
                 break;
+            case FILE:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    pictureChooseIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                    pictureChooseIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,
+                            getIntent().getBooleanExtra(ALLOW_MULTIPLE_IMAGES, false));
+                    pictureChooseIntent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+                } else {
+                    pictureChooseIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                }
+                pictureChooseIntent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                pictureChooseIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                pictureChooseIntent.setType("*/*");
+                chooseCode = SELECT_PHOTO;
+                break;
         }
 
         startActivityForResult(pictureChooseIntent, chooseCode);
