@@ -125,7 +125,7 @@ public class HiddenActivity extends Activity {
                 }
                 pictureChooseIntent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
                 pictureChooseIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                pictureChooseIntent.setType("image/*");
+                pictureChooseIntent.setType("*/*");
                 chooseCode = SELECT_PHOTO;
                 break;
         }
